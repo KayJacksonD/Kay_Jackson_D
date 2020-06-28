@@ -19,14 +19,26 @@
 <body>
 <div id="app">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="申请人" prop="ruleName">
-            <el-input v-model="ruleForm.ruleName"></el-input>
-        </el-form-item>
-        <el-form-item label="角色" prop="roleList">
-            <el-select placeholder="请选择角色">
-                <el-option v-for="(item,i) in ruleForm.roleList" :label="item.name" :value="item.roleCode"></el-option>
+        <el-form-item label="申请人" prop="userList">
+            <el-select placeholder="请选择申请人" filterable v-model="userListValue">
+                <el-option
+                        v-for="(item,i) in ruleForm.userList"
+                        :label="item.userAccount"
+                        :value="item.userId">
+                </el-option>
             </el-select>
         </el-form-item>
+        <el-form-item label="角色" prop="roleList">
+            <el-select placeholder="请选择角色" filterable v-model="roleListValue">
+                <el-option
+                        v-for="(item,i) in ruleForm.roleList"
+                        :label="item.name"
+                        :value="item.roleCode">
+                </el-option>
+            </el-select>
+        </el-form-item>
+
+
         <el-form-item label="有效期" required>
             <el-col :span="11">
                 <el-form-item prop="date1">
@@ -57,9 +69,12 @@
         el: "#app",
         data: {
             visible: false,
+            userListValue: '',
+            roleListValue: '',
             ruleForm: {
                 ruleName: '',
                 roleList: [],
+                userList: [],
                 date1: '',
                 date2: '',
                 delivery: false,
@@ -94,6 +109,7 @@
         },
         created() {
             this.initRoleList();
+            this.initUserList();
         },
         methods: {
             submitForm(formName) {
@@ -109,15 +125,6 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
-            /*getRoleList() {
-                axios({
-                    method: 'get',
-                    url: 'http://localhost:10081/menuController/getRoleList'
-                }).then(function (response) {
-                    this.roleList = response.data.data.roleList;
-                }.bind(this)).catch(function (error) {
-                })
-            },*/
             initRoleList() {
                 axios({
                     method: 'get',
@@ -126,12 +133,16 @@
                     this.ruleForm.roleList = response.data.data.roleList;
                 }.bind(this)).catch(function (error) {
                 })
-            }
-            /*initRoleList() {
-                axios.get("http://localhost:10081/permissionController/getAllRoles").then((response) => {
-                    alert("789")
+            },
+            initUserList() {
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:10081/userController/getAllUser'
+                }).then(function (response) {
+                    this.ruleForm.userList = response.data.data.userList;
+                }.bind(this)).catch(function (error) {
                 })
-            }*/
+            }
         }
     })
 </script>

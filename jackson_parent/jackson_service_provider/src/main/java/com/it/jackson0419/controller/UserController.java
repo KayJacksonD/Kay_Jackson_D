@@ -9,6 +9,8 @@ import com.it.jackson0419.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/userController")
@@ -24,5 +26,14 @@ public class UserController {
     public ResultVO getUserByUserId(@RequestParam Long userId) {
         User userVO = userService.getUserByUserId(userId);
         return ResultUtil.returnResult(userVO);
+    }
+
+    /**
+     * 根据用户账号查询user集合
+     * http://localhost:18081/test
+     */
+    @GetMapping(value = "/getAllUser")
+    public ResultVO getAllUser() {
+        return userService.getAllUser();
     }
 }

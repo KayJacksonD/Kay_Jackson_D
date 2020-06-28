@@ -3,6 +3,7 @@ package com.it.jackson0419.vo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,4 +27,5 @@ public class User extends BaseVO {
     private int age;
     private int roleCode;
     private List<Role> roles;
+    private List<User> userList = new ArrayList<>();
 }

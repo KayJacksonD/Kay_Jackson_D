@@ -2,11 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.it.jackson0419.dao.IUserDao">
-    <!--根据用户账号密码查询菜单-->
+    <!--根据userId查询user-->
     <select id="getUserByUserId" resultMap="userMap"
             parameterType="java.lang.Long">
-        SELECT * FROM USER WHERE userId = #{userId}
+        <include refid="selectFromUser"></include>
+        WHERE userId = #{userId}
     </select>
+
+    <!--根据用户账号查询user集合-->
+    <select id="getAllUser" resultMap="userMap">
+        <include refid="selectFromUser"></include>
+    </select>
+
+    <sql id="selectFromUser">
+        SELECT * FROM `user`
+    </sql>
 
     <resultMap id="userMap" type="com.it.jackson0419.vo.User">
         <id column="id" property="id"></id>
