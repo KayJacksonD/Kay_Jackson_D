@@ -10,4 +10,8 @@ import java.util.List;
 public interface IPermissionService {
 
     ResultVO addRoles(Role role);
+
+    ResultVO getAllRoles();
+
+
 }

@@ -14,6 +14,7 @@ public class Role extends BaseVO implements Serializable {
     private Integer roleCode;
     private String name; // 角色名称
     private List<String> names; // 角色名称集合
+    private List<Role> roleList = new ArrayList<>(); // 角色对象集合
     private String keyword; // 角色关键字，用于权限控制
     private String description; // 描述
     private Date effectiveTime; // 有效时间

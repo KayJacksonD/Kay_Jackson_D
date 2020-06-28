@@ -21,4 +21,13 @@ public class PermissionController {
     public ResultVO addRoles(@RequestBody Role role) {
         return permissionService.addRoles(role);
     }
+
+    /**
+     * 获取所有角色
+     * http://localhost:18081/test
+     */
+    @GetMapping(value = "/getAllRoles")
+    public ResultVO getAllRoles() {
+        return permissionService.getAllRoles();
+    }
 }

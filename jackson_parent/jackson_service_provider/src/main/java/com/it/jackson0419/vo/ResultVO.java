@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ResultVO {
-    private String state = "0";//0成功，1失败
+    private String state = TipVO.SUCCESS;//0成功，1失败
     private String msg;
     private Object data;
 }
