@@ -61,9 +61,9 @@
             getGallery() {
                 axios({
                     method: 'get',
-                    url: 'http://localhost:10081/galleryController/getGallery'
+                    url: 'http://localhost:10081/galleryController/getGallery/1/2'
                 }).then(function (response) {
-                    this.photoList = response.data.data;
+                    this.photoList = response.data.rows;
                 }.bind(this)).catch(function (error) {
                 })
             }

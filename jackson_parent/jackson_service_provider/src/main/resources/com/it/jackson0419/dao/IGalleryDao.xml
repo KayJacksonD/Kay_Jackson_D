@@ -13,6 +13,7 @@
     </resultMap>
 
     <select id="getSrcList" parameterType="java.lang.Long" resultType="java.lang.String">
-        SELECT gp.`bigPhotoUrl` FROM gallery g LEFT JOIN galleryMap gp ON gp.`galleryId` = #{id}
+        SELECT gp.`bigPhotoUrl` FROM gallery g
+        LEFT JOIN galleryMap gp ON g.`id` = gp.`galleryId` WHERE g.`id` = #{id}
     </select>
 </mapper>
