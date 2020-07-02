@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.it.jackson0419.dao.IGalleryDao">
+    <select id="getGallery" resultMap="galleryMap">
+        SELECT * FROM gallery
+    </select>
+
+    <resultMap id="galleryMap" type="com.it.jackson0419.vo.GalleryVO">
+        <id property="id" column="id"></id>
+        <result property="url" column="url"></result>
+        <collection property="srcList" column="id" select="getSrcList"></collection>
+    </resultMap>
+
+    <select id="getSrcList" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT gp.`bigPhotoUrl` FROM gallery g LEFT JOIN galleryMap gp ON gp.`galleryId` = #{id}
+    </select>
+</mapper>
