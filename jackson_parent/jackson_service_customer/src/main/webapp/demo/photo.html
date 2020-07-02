@@ -27,11 +27,11 @@
         <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
+                :current-page="currentPage"
+                :page-sizes="pageSizes"
+                :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :total="total">
         </el-pagination>
     </div>
 </div>
@@ -41,10 +41,10 @@
     var vue = new Vue({
         el: "#app",
         data: {
-            currentPage1: 5,
-            currentPage2: 5,
-            currentPage3: 5,
-            currentPage4: 4,
+            currentPage: 1,
+            pageSizes: [5, 10, 20],
+            pageSize: 1,
+            total: '',
             visible: false,
             photoList: []
         },
@@ -61,9 +61,13 @@
             getGallery() {
                 axios({
                     method: 'get',
-                    url: 'http://localhost:10081/galleryController/getGallery/1/2'
+                    url: 'http://localhost:10081/galleryController/getGallery/' + this.currentPage + '/' + this.pageSize
                 }).then(function (response) {
+                    alert(this.currentPage)
+                    alert(this.pageSizes)
+                    alert(this.pageSize)
                     this.photoList = response.data.rows;
+                    this.total = response.data.total;
                 }.bind(this)).catch(function (error) {
                 })
             }
