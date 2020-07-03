@@ -34,6 +34,17 @@
                 :total="total">
         </el-pagination>
     </div>
+    <!--<div class="block">
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="pageSizes"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total">
+        </el-pagination>
+    </div>-->
 </div>
 </body>
 </html>
@@ -42,30 +53,29 @@
         el: "#app",
         data: {
             currentPage: 1,
-            pageSizes: [5, 10, 20],
-            pageSize: 1,
+            pageSizes: [1, 6, 12],
+            pageSize: '',
             total: '',
             visible: false,
             photoList: []
         },
         created() {
+            this.pageSize = this.pageSizes[0];
             this.getGallery();
         },
         methods: {
             handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+                this.pageSize = val;
             },
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                this.currentPage = val;
+                this.getGallery();
             },
             getGallery() {
                 axios({
                     method: 'get',
                     url: 'http://localhost:10081/galleryController/getGallery/' + this.currentPage + '/' + this.pageSize
                 }).then(function (response) {
-                    alert(this.currentPage)
-                    alert(this.pageSizes)
-                    alert(this.pageSize)
                     this.photoList = response.data.rows;
                     this.total = response.data.total;
                 }.bind(this)).catch(function (error) {
