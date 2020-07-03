@@ -34,17 +34,6 @@
                 :total="total">
         </el-pagination>
     </div>
-    <!--<div class="block">
-        <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="pageSizes"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total">
-        </el-pagination>
-    </div>-->
 </div>
 </body>
 </html>
@@ -53,15 +42,15 @@
         el: "#app",
         data: {
             currentPage: 1,
-            pageSizes: [1, 6, 12],
-            pageSize: '',
-            total: '',
+            pageSizes: [6, 12],//下拉框n条/页
+            pageSize: '',//一页n条数据
+            total: '',//共n条数据
             visible: false,
-            photoList: []
+            photoList: []//查询后的相册列表填充到此list
         },
         created() {
-            this.pageSize = this.pageSizes[0];
-            this.getGallery();
+            this.pageSize = this.pageSizes[0];//初始化pageSize为pageSizes第一个数据
+            this.getGallery();//初始化相册
         },
         methods: {
             handleSizeChange(val) {
@@ -69,9 +58,10 @@
             },
             handleCurrentChange(val) {
                 this.currentPage = val;
-                this.getGallery();
+                this.getGallery();//当前页数据改变时调用方法查询相册列表
             },
             getGallery() {
+                //初始化相册
                 axios({
                     method: 'get',
                     url: 'http://localhost:10081/galleryController/getGallery/' + this.currentPage + '/' + this.pageSize

@@ -209,8 +209,8 @@
         created() {
             this.enName = this.getUrlParam("accountInput");
             this.password = this.getUrlParam("password");
-            this.initMenu();
-            this.getIcon();
+            this.initMenu();//初始化不同用户不同菜单列表
+            this.getIcon();//查询用户头像
         },
         methods: {
             initMenu() {
@@ -228,6 +228,7 @@
                 })
             },
             getIcon() {
+                //查询用户头像
                 var params = {
                     "enName": this.enName,
                     "password": this.password
