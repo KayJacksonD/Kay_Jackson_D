@@ -15,21 +15,15 @@
     <script src="../js/index2.js"></script>
 </head>
 <body>
-<!--<img src="../img/201603041726056446577.jpg" height=100% width=100%/>-->
-<!--<div id="app" style="text-align: center;margin-top: 10px">-->
 <div id="app" style="text-align: center">
-    <!--<h1 style="font-style: oblique;font-size: 30px">WELCOME to Kay.Jackson.D</h1>-->
     <el-tooltip content="点击头像播放音乐" placement="bottom" effect="light">
-        <!--<el-button>WELCOME to Kay.Jackson.D</el-button>-->
         <h1 style="font-style: oblique;font-size: 30px" onclick="playVid()">WELCOME to Kay.Jackson.D</h1>
     </el-tooltip>
-    <!--{{ item }}-->
     <el-carousel :interval="4000" type="card" height="500px">
         <el-carousel-item v-for="item in 6" :key="item">
             <h3 class="medium"></h3>
         </el-carousel-item>
     </el-carousel>
-
 </div>
 </body>
 </html>
