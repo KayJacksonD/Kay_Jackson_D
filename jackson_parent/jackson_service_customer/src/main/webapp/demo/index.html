@@ -45,7 +45,10 @@
                     <el-col :span="3">
                         <el-submenu index="2">
                             <template slot="title">My WorkSpace</template>
-                            <el-menu-item index="2-1">My Items</el-menu-item>
+                            <a href="workFlow.html" target="right" style="color: black">
+                                <el-menu-item index="2-1">My Items</el-menu-item>
+                            </a>
+                            <!--<el-menu-item index="2-1">My Items</el-menu-item>-->
                             <el-submenu index="2-2">
                                 <template slot="title">option2</template>
                                 <el-menu-item index="2-2-1">option1</el-menu-item>
@@ -186,7 +189,7 @@
                 <!--main-->
                 <el-main>
                     <iframe name="right" src="welcome.html" frameborder="0" width="100%" height="630px"
-                            scrolling="no"></iframe>
+                            scrolling="yes"></iframe>
                     <!--Footer-->
                     <!--<el-footer></el-footer>-->
                 </el-main>
