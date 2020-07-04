@@ -9,15 +9,50 @@
 </head>
 <body>
 <div id="app">
-    <div id="page">
-        <div style="width: 100%" class="flex-container column">
-            <video id="video" src="../mp3/岁月如歌(电视剧《冲上云霄》主题曲)-陈奕迅.mp3" controls="controls" autoplay="autoplay"
-                   loop="loop"></video>
-            <!--<img id="img" class="play" style="transform: translate(-1584.4%, 121.5%) scale(1)" :src="sound"
-                 @click="play()">-->
-        </div>
-    </div>
-
+    <el-row class="tac">
+        <el-col :span="12">
+            <el-menu
+                    default-active="2"
+                    class="el-menu-vertical-demo"
+                    @open="handleOpen"
+                    @close="handleClose">
+                <el-submenu index="1">
+                    <template slot="title">
+                        <i class="el-icon-location"></i>
+                        <span>菜单</span>
+                    </template>
+                    <el-submenu index="1-4">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span>导航一</span>
+                        </template>
+                        <el-menu-item index="1-4-1">1</el-menu-item>
+                        <el-menu-item index="1-4-2">2</el-menu-item>
+                    </el-submenu>
+                </el-submenu>
+            </el-menu>
+            <el-menu
+                    default-active="2"
+                    class="el-menu-vertical-demo"
+                    @open="handleOpen"
+                    @close="handleClose">
+                <el-submenu index="1">
+                    <template slot="title">
+                        <i class="el-icon-location"></i>
+                        <span>菜单</span>
+                    </template>
+                    <el-submenu index="1-4">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span>导航一</span>
+                        </template>
+                        <el-menu-item index="1-4-1">1</el-menu-item>
+                        <el-menu-item index="1-4-2">2</el-menu-item>
+                    </el-submenu>
+                </el-submenu>
+            </el-menu>
+        </el-col>
+    </el-row>
 </div>
 </body>
 </html>
@@ -26,45 +61,81 @@
     var vue = new Vue({
         el: "#app",
         data: {
-            visible: false,
-            sound: '../img/img06.jpg'
+            menuList: [{
+                "id": 5,
+                "menuCode": null,
+                "title": "System Menu",
+                "linkUrl": null,
+                "path": "2",
+                "priority": null,
+                "description": null,
+                "icon": "fa-user-md",
+                "roles": [],
+                "children": [
+                    {
+                        "id": 6,
+                        "menuCode": null,
+                        "title": "My System",
+                        "linkUrl": "04.Table.html",
+                        "path": "/2-1",
+                        "priority": null,
+                        "description": null,
+                        "icon": "el-menu-vertical-demo",
+                        "roles": [],
+                        "children": [],
+                        "parentMenuId": 5
+                    },
+                    {
+                        "id": 7,
+                        "menuCode": null,
+                        "title": "Additional Settings",
+                        "linkUrl": "test.html",
+                        "path": "/2-2",
+                        "priority": null,
+                        "description": null,
+                        "icon": "el-menu-vertical-demo",
+                        "roles": [],
+                        "children": [],
+                        "parentMenuId": 5
+                    },
+                    {
+                        "id": 8,
+                        "menuCode": null,
+                        "title": "Permissions",
+                        "linkUrl": "permission.html",
+                        "path": "/2-3",
+                        "priority": null,
+                        "description": null,
+                        "icon": "el-menu-vertical-demo",
+                        "roles": [],
+                        "children": [
+                            {
+                                "id": 9,
+                                "menuCode": null,
+                                "title": "RolePermission",
+                                "linkUrl": "permission.html",
+                                "path": "/2-3-1",
+                                "priority": null,
+                                "description": null,
+                                "icon": "el-menu-vertical-demo",
+                                "roles": [],
+                                "children": [],
+                                "parentMenuId": 8
+                            }
+                        ],
+                        "parentMenuId": 5
+                    }
+                ],
+                "parentMenuId": -1
+            }]
         },
         methods: {
-            play() {
-                let vo = document.getElementById("video")
-                if (this.sound == require('../static/img/33.png')) {
-                    this.sound = require('../static/img/22.png')
-                    vo.autoplay = true
-                    vo.play()
-                }
-                else {
-                    this.sound = require('../static/img/33.png')
-                    vo.pause()
-                }
-
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
             }
         }
     })
 </script>
-<style>
-    .el-col {
-        border-radius: 4px;
-    }
-
-    .bg-purple-dark {
-        background: #99a9bf;
-    }
-
-    .bg-purple {
-        background: #d3dce6;
-    }
-
-    .bg-purple-light {
-        background: #e5e9f2;
-    }
-
-    .grid-content {
-        border-radius: 4px;
-        min-height: 36px;
-    }
-</style>

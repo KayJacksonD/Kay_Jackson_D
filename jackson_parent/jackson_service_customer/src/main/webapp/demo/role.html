@@ -28,10 +28,10 @@
                 </el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="权限" prop="permissionList">
-            <el-select placeholder="请选择权限" filterable v-model="permissionListValue">
+        <el-form-item label="角色" prop="roleList">
+            <el-select placeholder="请选择角色" filterable v-model="roleListValue">
                 <el-option
-                        v-for="(item,i) in ruleForm.permissionList"
+                        v-for="(item,i) in ruleForm.roleList"
                         :label="item.name"
                         :value="item.roleCode">
                 </el-option>
@@ -70,7 +70,7 @@
         data: {
             visible: false,
             userListValue: '',
-            permissionList: '',
+            roleListValue: '',
             ruleForm: {
                 ruleName: '',
                 roleList: [],
