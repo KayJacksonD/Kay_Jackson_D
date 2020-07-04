@@ -30,7 +30,7 @@
             <el-main>
                 <template v-for="(item,index) in applicationList">
                     <el-collapse v-model="activeName" accordion>
-                        <el-collapse-item title="分摊基线申请1" :name="index">
+                        <el-collapse-item :title="'分摊基线申请'+item.applicationDate" :name="index">
                             <el-row class="colorStyle">
                                 <el-col :span="6">
                                     <div class="grid-content bg-purple">申&nbsp;&nbsp;&nbsp;请&nbsp;&nbsp;&nbsp;&nbsp;人：{{item.applicant}}</div>
@@ -94,19 +94,17 @@
                     firstContent: '同意',
                     secondApprove: 'dwx889459',
                     secondApproveDate: '2020/07/04',
-                    secondContent: '同意',
-                    name: ''//必须属性，不然点击一个选项其他全部展开
+                    secondContent: '同意'
                 }, {
-                    applicant: 'dwx8894592',
+                    applicant: 'dwx8894591',
                     applicationDate: '2020/07/04',
                     content: '望批准！',
                     fistApprove: 'dwx889459',
                     fistApproveDate: '2020/07/04',
-                    firstContent: '同意2',
+                    firstContent: '同意',
                     secondApprove: 'dwx889459',
                     secondApproveDate: '2020/07/04',
-                    secondContent: '同意2',
-                    name: ''
+                    secondContent: '同意'
                 }
             ]
         },
