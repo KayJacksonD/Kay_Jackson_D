@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kay.Jackson.D</title>
+    <script src="../myPa/axios-0.18.0.js"></script>
+
+</head>
+<!-- 引入ElementUI样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入ElementUI组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<body>
+<div id="app">
+    <el-container>
+        <el-main>
+            <el-row>
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-dark">
+                        <el-avatar :size="large" :src="circleUrl" @click="drawer = true"></el-avatar>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-dark">
+                        <el-button @click="drawer = true" type="primary">
+                            更换头像
+                        </el-button>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+    <!--我是外面的 Drawer
+    我是里面的-->
+    <el-drawer
+            title=""
+            :visible.sync="drawer"
+            size="30%">
+        <div>
+            <el-container>
+                <el-main>
+                    <el-row>
+                        <el-col :span="4">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <el-avatar :size="large" :src="circleUrl" @click="drawer = true"></el-avatar>
+                            </div>
+                        </el-col>
+                        <el-col :span="2">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <h3 style="color: #808080;font-family: 隶书">Kay.Jackson.D</h3>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="10">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <el-rate
+                                        v-model="value"
+                                        disabled
+                                        show-score
+                                        text-color="#ff9900"
+                                        score-template="{value}级">
+                                </el-rate>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="24">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <h5 style="color: #666666;font-family: 华文楷体">个性签名啊啊啊啊啊！</h5>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-divider></el-divider>
+                    <el-row>
+                        <el-col :span="24">
+                            <div class="grid-content bg-purple-dark">
+                                <el-button @click="innerDrawer = true">点击编辑资料</el-button>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-main>
+            </el-container>
+            <el-drawer
+                    title=""
+                    :append-to-body="true"
+                    :before-close="handleClose"
+                    :visible.sync="innerDrawer">
+                <el-upload
+                        class="avatar-uploader"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </el-drawer>
+        </div>
+    </el-drawer>
+</div>
+</body>
+</html>
+<script>
+
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            circleUrl: "../img/mjimg.jpg",
+            squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+            sizeList: ["large", "medium", "small"],
+            drawer: false,
+            innerDrawer: false,
+            imageUrl: '',
+            input: '',
+            value: 4
+        },
+        created() {
+
+        },
+        methods: {
+            handleClose(done) {
+                this.$confirm('还有未保存的工作哦确定关闭吗？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {
+                    });
+            },
+            handleAvatarSuccess(res, file) {
+                this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
+            }
+        }
+    })
+</script>
+<style>
+    .el-header, .el-footer {
+        background-color: #B3C0D1;
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+    }
+
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .el-main {
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
+        /*line-height: 350px;*/
+    }
+
+    body > .el-container {
+        margin-bottom: 40px;
+    }
+
+    .el-container:nth-child(5) .el-aside,
+    .el-container:nth-child(6) .el-aside {
+        line-height: 260px;
+    }
+
+    .el-container:nth-child(7) .el-aside {
+        line-height: 320px;
+    }
+</style>
+<style>
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
+    }
+</style>

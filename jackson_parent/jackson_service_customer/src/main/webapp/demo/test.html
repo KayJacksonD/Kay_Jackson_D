@@ -9,50 +9,25 @@
 </head>
 <body>
 <div id="app">
-    <el-row class="tac">
-        <el-col :span="12">
-            <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    @open="handleOpen"
-                    @close="handleClose">
-                <el-submenu index="1">
-                    <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span>菜单</span>
-                    </template>
-                    <el-submenu index="1-4">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>导航一</span>
-                        </template>
-                        <el-menu-item index="1-4-1">1</el-menu-item>
-                        <el-menu-item index="1-4-2">2</el-menu-item>
-                    </el-submenu>
-                </el-submenu>
-            </el-menu>
-            <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    @open="handleOpen"
-                    @close="handleClose">
-                <el-submenu index="1">
-                    <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span>菜单</span>
-                    </template>
-                    <el-submenu index="1-4">
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>导航一</span>
-                        </template>
-                        <el-menu-item index="1-4-1">1</el-menu-item>
-                        <el-menu-item index="1-4-2">2</el-menu-item>
-                    </el-submenu>
-                </el-submenu>
-            </el-menu>
-        </el-col>
-    </el-row>
+    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+        点我打开
+    </el-button>
+
+    <el-drawer
+            title="我是外面的 Drawer"
+            :visible.sync="drawer"
+            size="50%">
+        <div>
+            <el-button @click="innerDrawer = true">打开里面的!</el-button>
+            <el-drawer
+                    title="我是里面的"
+                    :append-to-body="true"
+                    :before-close="handleClose"
+                    :visible.sync="innerDrawer">
+                <p>_(:зゝ∠)_</p>
+            </el-drawer>
+        </div>
+    </el-drawer>
 </div>
 </body>
 </html>
@@ -61,80 +36,17 @@
     var vue = new Vue({
         el: "#app",
         data: {
-            menuList: [{
-                "id": 5,
-                "menuCode": null,
-                "title": "System Menu",
-                "linkUrl": null,
-                "path": "2",
-                "priority": null,
-                "description": null,
-                "icon": "fa-user-md",
-                "roles": [],
-                "children": [
-                    {
-                        "id": 6,
-                        "menuCode": null,
-                        "title": "My System",
-                        "linkUrl": "04.Table.html",
-                        "path": "/2-1",
-                        "priority": null,
-                        "description": null,
-                        "icon": "el-menu-vertical-demo",
-                        "roles": [],
-                        "children": [],
-                        "parentMenuId": 5
-                    },
-                    {
-                        "id": 7,
-                        "menuCode": null,
-                        "title": "Additional Settings",
-                        "linkUrl": "test.html",
-                        "path": "/2-2",
-                        "priority": null,
-                        "description": null,
-                        "icon": "el-menu-vertical-demo",
-                        "roles": [],
-                        "children": [],
-                        "parentMenuId": 5
-                    },
-                    {
-                        "id": 8,
-                        "menuCode": null,
-                        "title": "Permissions",
-                        "linkUrl": "permission.html",
-                        "path": "/2-3",
-                        "priority": null,
-                        "description": null,
-                        "icon": "el-menu-vertical-demo",
-                        "roles": [],
-                        "children": [
-                            {
-                                "id": 9,
-                                "menuCode": null,
-                                "title": "RolePermission",
-                                "linkUrl": "permission.html",
-                                "path": "/2-3-1",
-                                "priority": null,
-                                "description": null,
-                                "icon": "el-menu-vertical-demo",
-                                "roles": [],
-                                "children": [],
-                                "parentMenuId": 8
-                            }
-                        ],
-                        "parentMenuId": 5
-                    }
-                ],
-                "parentMenuId": -1
-            }]
+            drawer: false,
+            innerDrawer: false,
         },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
+            handleClose(done) {
+                this.$confirm('还有未保存的工作哦确定关闭吗？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {
+                    });
             }
         }
     })
