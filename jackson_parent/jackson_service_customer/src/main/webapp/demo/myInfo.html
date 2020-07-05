@@ -14,26 +14,81 @@
 
 <body>
 <div id="app">
-    <el-container>
-        <el-main>
+    <el-row>
+        <el-col :span="24">
+            <div class="grid-content bg-purple-dark">
+                <el-main>
+                    <el-row>
+                        <el-col :span="2">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <el-avatar :size="large" :src="circleUrl" @click="drawer = true"></el-avatar>
+                            </div>
+                        </el-col>
+                        <el-col :span="2">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <h3 style="color: #808080;font-family: 隶书">Kay.Jackson.D</h3>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="24">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <el-rate
+                                        v-model="value"
+                                        disabled
+                                        show-score
+                                        text-color="#ff9900"
+                                        score-template="{value}级">
+                                </el-rate>
+                            </div>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="24">
+                            <div class="grid-content bg-purple-dark" align="left">
+                                <h5 style="color: #666666;font-family: 华文楷体">个性签名啊啊啊啊啊！</h5>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-main>
+            </div>
+        </el-col>
+    </el-row>
+
+    <!--上-->
+    <el-row>
+        <el-col :span="24">
             <el-row>
                 <el-col :span="24">
                     <div class="grid-content bg-purple-dark">
-                        <el-avatar :size="large" :src="circleUrl" @click="drawer = true"></el-avatar>
+                        <el-table
+                                :data="tableData"
+                                style="width: 100%">
+                            <el-table-column
+                                    prop=""
+                                    label="基本信息"
+                                    width="180">
+                                <!--<i class="el-icon-user"></i>-->
+                            </el-table-column>
+                            <el-table-column
+                                    prop=""
+                                    label=""
+                                    width="180">
+                                <!--<i class="el-icon-position"></i>-->
+                            </el-table-column>
+                            <!--<el-table-column
+                                    prop="address"
+                                    label="地址">
+                            </el-table-column>-->
+                        </el-table>
+                        <h5></h5>
+                        <!--<el-divider></el-divider>-->
+                        <el-button @click="drawer = true">点击编辑资料</el-button>
                     </div>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col :span="24">
-                    <div class="grid-content bg-purple-dark">
-                        <el-button @click="drawer = true" type="primary">
-                            更换头像
-                        </el-button>
-                    </div>
-                </el-col>
-            </el-row>
-        </el-main>
-    </el-container>
+        </el-col>
+    </el-row>
     <!--我是外面的 Drawer
     我是里面的-->
     <el-drawer
@@ -117,7 +172,17 @@
             innerDrawer: false,
             imageUrl: '',
             input: '',
-            value: 4
+            value: 4,
+            activeName: '1',
+            tableData: [{
+                date: '456',
+                name: '王小虎'/*,
+                address: '上海市普陀区金沙江路 1518 弄'*/
+            }, {
+                date: '2016-05-04',
+                name: '王小虎'/*,
+                address: '上海市普陀区金沙江路 1517 弄'*/
+            }]
         },
         created() {
 
@@ -152,9 +217,9 @@
 <style>
     .el-header, .el-footer {
         background-color: #B3C0D1;
-        color: #333;
+        /*color: #333;*/
         text-align: center;
-        line-height: 60px;
+        /*line-height: 60px;*/
     }
 
     .el-aside {
@@ -165,8 +230,9 @@
     }
 
     .el-main {
-        background-color: #E9EEF3;
-        color: #333;
+        /*background-color: #E9EEF3;*/
+        background-image: url("../img/4.jpg");
+        /*color: #333;*/
         text-align: center;
         /*line-height: 350px;*/
     }
@@ -212,3 +278,4 @@
         display: block;
     }
 </style>
+

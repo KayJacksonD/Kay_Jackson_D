@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kay.Jackson.D</title>
+    <script src="../myPa/axios-0.18.0.js"></script>
+
+</head>
+<!-- 引入ElementUI样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入ElementUI组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<body>
+<div id="app">
+    <template v-for="(item,index) in applicationList">
+        <el-collapse v-model="activeName" accordion>
+            <el-collapse-item :title="'分摊基线申请(代办)'+item.applicationDate" :name="index">
+                <el-row class="colorStyle">
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">申&nbsp;&nbsp;&nbsp;请&nbsp;&nbsp;&nbsp;&nbsp;人：{{item.applicant}}</div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">申请日期：{{item.applicationDate}}</div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">备注：{{item.content}}</div>
+                    </el-col>
+                </el-row>
+                <el-row class="colorStyle">
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">一级审批人：{{item.fistApprove}}</div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">审批日期：{{item.fistApproveDate}}</div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">备注：{{item.firstContent}}</div>
+                    </el-col>
+                </el-row>
+                <el-row class="colorStyle">
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">二级审批人：{{item.secondApprove}}</div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">审批日期：{{item.secondApproveDate}}</div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">备注：{{item.secondContent}}</div>
+                    </el-col>
+                </el-row>
+                <br>
+                <el-row>
+                    <el-button type="success" size="mini" plain>通过</el-button>
+                    <el-button type="danger" size="mini" plain>驳回</el-button>
+                    <el-button size="mini" plain><a href="04.Table.html">点击查看详情</a></el-button>
+                </el-row>
+            </el-collapse-item>
+        </el-collapse>
+    </template>
+</div>
+</body>
+</html>
+<script>
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            activeName: '1',
+            applicationList: [
+                {
+                    applicant: 'dwx8894591',
+                    applicationDate: '2020/07/04',
+                    content: '望批准！',
+                    fistApprove: 'dwx889459',
+                    fistApproveDate: '2020/07/04',
+                    firstContent: '同意',
+                    secondApprove: 'dwx889459',
+                    secondApproveDate: '2020/07/04',
+                    secondContent: '同意'
+                }, {
+                    applicant: 'dwx8894591',
+                    applicationDate: '2020/07/04',
+                    content: '望批准！',
+                    fistApprove: 'dwx889459',
+                    fistApproveDate: '2020/07/04',
+                    firstContent: '同意',
+                    secondApprove: 'dwx889459',
+                    secondApproveDate: '2020/07/04',
+                    secondContent: '同意'
+                }
+            ]
+        },
+        methods: {
+            handleClick(tab, event) {
+                console.log(tab, event);
+            }
+        }
+    })
+</script>
+<style type="text/css">
+    a {
+        text-decoration: none;
+    }
+</style>
+<style>
+    .colorStyle {
+        background-color: #ffffcc;
+    }
+</style>
