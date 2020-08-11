@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基金</title>
+    <script src="../myPa/axios-0.18.0.js"></script>
+
+</head>
+<!-- 引入ElementUI样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入ElementUI组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<body>
+<div id="app">
+    <el-container>
+        <el-main>
+            <el-form ref="form" :model="form" label-width="160px">
+                <el-form-item label="定投的期数">
+                    <el-input v-model="form.period"></el-input>
+                </el-form-item>
+                <el-form-item label="每笔投入">
+                    <el-input v-model="form.eachInputMoney"></el-input>
+                </el-form-item>
+                <el-form-item label="共投入资金">
+                    <el-input v-model="form.sum"></el-input>
+                </el-form-item>
+                <el-form-item label="当前净值">
+                    <el-input v-model="form.currentPrice"></el-input>
+                </el-form-item>
+                <el-form-item label="我的净值">
+                    <el-input v-model="form.myEachInputMoney"></el-input>
+                </el-form-item>
+                <el-form-item label="拥有的份额">
+                    <el-input v-model="form.account"></el-input>
+                </el-form-item>
+                <el-form-item label="盈亏金额">
+                    <el-input v-model="form.endMoney"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="initFunList">查询</el-button>
+                </el-form-item>
+            </el-form>
+        </el-main>
+    </el-container>
+</div>
+</body>
+</html>
+<script>
+
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            form: {
+                period: '1',
+                eachInputMoney: '100',
+                sum: '',
+                currentPrice: '',
+                myEachInputMoney: '',
+                account: '',
+                endMoney: ''
+            }
+        },
+        created() {
+            this.drawer();
+        },
+        methods: {
+            initFunList() {
+                axios.post("http://localhost:10081/funController/getFun", this.form).then((response) => {
+                    this.form.sum = response.data.data.sum;
+                    this.form.currentPrice = response.data.data.currentPrice;
+                    this.form.myEachInputMoney = response.data.data.myEachInputMoney;
+                    this.form.account = response.data.data.account;
+                    this.form.endMoney = response.data.data.endMoney;
+                }).catch((error) => {
+
+                }).finally(() => {
+                    // 保存成功之后，刷新列表
+                    this.findPage();
+                })
+            }
+        }
+    })
+</script>
+<style>
+    .el-header, .el-footer {
+        background-color: #B3C0D1;
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+    }
+
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .el-main {
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
+        line-height: 160px;
+    }
+
+    body > .el-container {
+        margin-bottom: 40px;
+    }
+
+    .el-container:nth-child(5) .el-aside,
+    .el-container:nth-child(6) .el-aside {
+        line-height: 260px;
+    }
+
+    .el-container:nth-child(7) .el-aside {
+        line-height: 320px;
+    }
+</style>

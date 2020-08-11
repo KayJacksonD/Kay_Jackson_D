@@ -103,7 +103,7 @@
                     {required: true, message: '请选择活动资源', trigger: 'change'}
                 ],
                 desc: [
-                    {required: true, message: '请填写活动形式', trigger: 'blur'}
+                    {required: true, message: '请填写备注内容', trigger: 'blur'}
                 ]
             }
         },
@@ -115,7 +115,6 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-
                     } else {
                         console.log('error submit!!');
                         return false;
